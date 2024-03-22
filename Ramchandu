@@ -1,0 +1,88 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNR3OKi63JyEm6WesvTBqx7",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Sandeeprule/Sandeeprule/blob/main/Ramchandu\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "8F2X2oW82jXZ",
+        "outputId": "27cb3e17-75cf-48da-fe34-517f1b696251"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Accuracy: 0.0\n",
+            "Predicted Diagnosis: ['Strepsils']\n"
+          ]
+        }
+      ],
+      "source": [
+        "from sklearn.tree import DecisionTreeClassifier\n",
+        "from sklearn.model_selection import train_test_split\n",
+        "from sklearn.metrics import accuracy_score\n",
+        "\n",
+        "# Sample medical data (replace with your dataset)\n",
+        "# Features: Symptoms (e.g., fever, cough, sore throat)\n",
+        "# Target: Diagnosis (e.g., common cold, flu, strep throat)\n",
+        "X = [\n",
+        "    [1, 1, 0],  # [fever, cough, no sore throat] - Noeprofin\n",
+        "    [1, 0, 1],  # [fever, no cough, sore throat] - VicksAction\n",
+        "    [0, 1, 1]  # [no fever, cough, sore throat] - strepsils\n",
+        "    # Add more samples as needed\n",
+        "]\n",
+        "y = ['neoprofin', 'vicksAction', 'Strepsils']  # Corresponding diagnoses\n",
+        "\n",
+        "# Split data into training and testing sets\n",
+        "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n",
+        "\n",
+        "# Initialize the decision tree classifier\n",
+        "model = DecisionTreeClassifier()\n",
+        "\n",
+        "# Train the decision tree classifier model\n",
+        "model.fit(X_train, y_train)\n",
+        "\n",
+        "# Make predictions on the test set\n",
+        "y_pred = model.predict(X_test)\n",
+        "\n",
+        "# Calculate accuracy\n",
+        "accuracy = accuracy_score(y_test, y_pred)\n",
+        "print(\"Accuracy:\", accuracy)\n",
+        "\n",
+        "# Example usage\n",
+        "# Input symptoms: [fever, cough, no sore throat] input_symptoms = [[1, 1, 0]]\n",
+        "predicted_diagnosis = model.predict([[0, 1, 1]])\n",
+        "print(\"Predicted Diagnosis:\", predicted_diagnosis)\n"
+      ]
+    }
+  ]
+}
